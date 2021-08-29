@@ -9,24 +9,25 @@ function loadGameGrid() {
 }
 
 function ConnectFour() {
-  const [gridState, updateGridState] = useState(loadGameGrid)
-  const [playerNumber, nextPlayer] = useState(1)
+  const [gridState, setGridState] = useState(loadGameGrid)
+  const [currentPlayer, setCurrentPlayer] = useState(1)
 
   useEffect(() => {
     if (game.isWin()) {
-      const playAgain = window.confirm(`Player ${playerNumber} has won the game! Would you like to play again?`)
+      const playAgain = window.confirm(`Player ${currentPlayer} has won the game! Would you like to play again?`)
       if (playAgain) {
-        return updateGridState(game.newGame())
+        return setGridState(game.newGame())
       }
     }
-  }, [playerNumber])
+  }, [currentPlayer])
 
   const dropToken = (columnIndex: number) => () => {
-    const forPlayerTurn = game.takeTurn.player(playerNumber).column(columnIndex)
+    const forPlayerTurn = game.takeTurn.player(currentPlayer).column(columnIndex)
     const isValidMove = forPlayerTurn.drop.standardToken()
     if (isValidMove) {
-      updateGridState(game.grid)
-      nextPlayer(playerNumber === 1 ? 2 : 1)
+      const nextPlayer = currentPlayer === 1 ? 2 : 1
+      setGridState(game.grid)
+      setCurrentPlayer(nextPlayer)
     } else {
       alert('invalid move!')
     }
@@ -36,7 +37,7 @@ function ConnectFour() {
     <main className={'ConnectFour'}>
       <header className={'Header'}>
         <h1>Connect Four</h1>
-        <h3>Player Turn: {playerNumber}</h3>
+        <h3>Player Turn: {currentPlayer}</h3>
       </header>
       <div className={'Game'}>
         <div className={'Grid'}>
