@@ -14,20 +14,20 @@ interface Move {
   token: Token;
 }
 
-type ConnectFourGrid = Token[][]
-export class ConnectFourGame  {
+type ConnectMoreGrid = Token[][]
+export class ConnectMoreGame  {
   private readonly HEIGHT = 6
   private readonly WIDTH = 7
   private readonly PLAYER_ONE = 1
   private readonly PLAYER_TWO = 2
   private readonly moveStack: number[] = []
-  private __grid: ConnectFourGrid = this.newGrid()
+  private __grid: ConnectMoreGrid = this.newGrid()
   readonly TOKEN_TYPES: TokenType = {
     STANDARD: 'STANDARD',
     // BOMB: 'BOMB',
   }
 
-  public get grid(): ConnectFourGrid {
+  public get grid(): ConnectMoreGrid {
     return [...this.__grid]
   }
 
@@ -58,7 +58,7 @@ export class ConnectFourGame  {
     }
   }
 
-  public newGame(): ConnectFourGrid {
+  public newGame(): ConnectMoreGrid {
     this.__grid = this.newGrid()
     return this.grid
   }
@@ -84,7 +84,7 @@ export class ConnectFourGame  {
   }
   private n = 0
   public isWin(): boolean {
-    // // TODO: win logic duh
+    // TODO: win logic duh
     return false
     // if (this.n === 6) {
     //   this.n = 1
@@ -106,7 +106,7 @@ export class ConnectFourGame  {
     return JSON.stringify(this.__grid, null, 2)
   }
 
-  private newGrid(): ConnectFourGrid {
+  private newGrid(): ConnectMoreGrid {
     const grid = []
     for (let i = 0; i < this.WIDTH; i += 1) {
       grid.push([])

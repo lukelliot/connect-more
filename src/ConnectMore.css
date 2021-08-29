@@ -17,7 +17,7 @@ body {
   background: lightgreen;
 }
 
-.ConnectFour {
+.ConnectMore {
   background-color: #282c34;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,11 @@ body {
   border: 3px green solid;
 }
 
-.ConnectFour .Game {
+.ConnectMore .Header {
+  text-align: center;
+}
+
+.ConnectMore .Game {
   background-color: blue;
   display: flex;
   width: 100%;
@@ -37,14 +41,14 @@ body {
   justify-content: center;
 }
 
-.ConnectFour .Game .Grid {
+.ConnectMore .Game .Grid {
   display: flex;
   flex-direction: row;
   width: 40%;
   justify-content: space-evenly;
 }
 
-.ConnectFour .Game .Grid .Column {
+.ConnectMore .Game .Grid .Column {
   display: flex;
   flex-direction: column-reverse;
   flex-grow: 1;
@@ -55,20 +59,20 @@ body {
   cursor: pointer;
 }
 
-.ConnectFour .Game .Grid .Column:hover {
+.ConnectMore .Game .Grid .Column:hover {
   border: 1px solid teal
 }
 
-.ConnectFour .Game .Grid .Column .Token {
+.ConnectMore .Game .Grid .Column .Token {
   width: 75px;
   height: 75px;
   text-align: center;
   border: 1px solid grey;
 }
 
-.ConnectFour .Game .Grid .Column .Token.player-1 {
+.ConnectMore .Game .Grid .Column .Token.player-1 {
   background-color: blueviolet;
 }
-.ConnectFour .Game .Grid .Column .Token.player-2 {
+.ConnectMore .Game .Grid .Column .Token.player-2 {
   background-color: burlywood;
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ConnectFour from './ConnectFour';
+import ConnectMore from './ConnectMore';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ConnectFour />
+    <ConnectMore />
   </React.StrictMode>,
   document.getElementById('root')
 );

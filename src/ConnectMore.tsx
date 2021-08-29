@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
-import './ConnectFour.css';
-import { ConnectFourGame, Token } from './state/connect-four-game'
+import './ConnectMore.css';
+import { ConnectMoreGame, Token } from './state/connect-four-game'
 
-let game: ConnectFourGame
+let game: ConnectMoreGame
 function loadGameGrid() {
-  game = new ConnectFourGame()
+  game = new ConnectMoreGame()
   return game.grid
 }
 
-function ConnectFour() {
+function ConnectMore() {
   const [gridState, setGridState] = useState(loadGameGrid)
   const [currentPlayer, setCurrentPlayer] = useState(1)
 
@@ -37,10 +37,10 @@ function ConnectFour() {
   }
 
   return (
-    <main className={'ConnectFour'}>
+    <main className={'ConnectMore'}>
       <header className={'Header'}>
-        <h1>Connect Four</h1>
-        <h3>Player Turn: {currentPlayer}</h3>
+        <h1>Connect More</h1>
+        <h3>Current Player: {currentPlayer}</h3>
       </header>
       <div className={'Game'}>
         <div className={'Grid'}>
@@ -59,4 +59,4 @@ function ConnectFour() {
   );
 }
 
-export default ConnectFour;
+export default ConnectMore;

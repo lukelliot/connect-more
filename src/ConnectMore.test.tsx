@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import ConnectFour from './ConnectFour';
+import ConnectMore from './ConnectMore';
 
 test('renders learn react link', () => {
-  render(<ConnectFour />);
+  render(<ConnectMore />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
