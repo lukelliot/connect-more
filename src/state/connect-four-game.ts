@@ -14,7 +14,6 @@ interface Move {
   token: Token;
 }
 
-
 type ConnectFourGrid = Token[][]
 export class ConnectFourGame  {
   private readonly HEIGHT = 6
@@ -63,7 +62,7 @@ export class ConnectFourGame  {
 
   public newGame(): ConnectFourGrid {
     this.__grid = this.newGrid()
-    return this.__grid
+    return this.grid
   }
 
   private drop({ column, token }: Move): boolean {
@@ -85,9 +84,14 @@ export class ConnectFourGame  {
 
     return true
   }
-
+  private n = 0
   public isWin(): boolean {
     // TODO: win logic duh
+    if (this.n === 6) {
+      this.n = 1
+      return true
+    }
+    this.n += 1
     return false
   }
 

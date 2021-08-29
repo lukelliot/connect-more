@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './ConnectFour.css';
 import { ConnectFourGame, Token } from './state/connect-four-game'
 
@@ -12,17 +12,21 @@ function ConnectFour() {
   const [gridState, updateGridState] = useState(loadGameGrid)
   const [playerNumber, nextPlayer] = useState(1)
 
+  useEffect(() => {
+    if (game.isWin()) {
+      const playAgain = window.confirm(`Player ${playerNumber} has won the game! Would you like to play again?`)
+      if (playAgain) {
+        return updateGridState(game.newGame())
+      }
+    }
+  }, [playerNumber])
+
   const dropToken = (columnIndex: number) => () => {
     const forPlayerTurn = game.takeTurn.player(playerNumber).column(columnIndex)
     const isValidMove = forPlayerTurn.drop.standardToken()
-
-
     if (isValidMove) {
       updateGridState(game.grid)
       nextPlayer(playerNumber === 1 ? 2 : 1)
-      if (game.isWin()) {
-        alert(`Player ${playerNumber} has won the game!`)
-      }
     } else {
       alert('invalid move!')
     }
