@@ -84,13 +84,14 @@ export class ConnectFourGame  {
   }
   private n = 0
   public isWin(): boolean {
-    // TODO: win logic duh
-    if (this.n === 6) {
-      this.n = 1
-      return true
-    }
-    this.n += 1
+    // // TODO: win logic duh
     return false
+    // if (this.n === 6) {
+    //   this.n = 1
+    //   return true
+    // }
+    // this.n += 1
+    // return false
   }
 
   private isValidPlayer(n: number): boolean {
