@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  /* Base styles go here */
+  font: 14px/1.5 Arial, sans-serif;
+  background: rgb(237, 26, 241);
+}
+
+body {
+  background: lightgreen;
+}
+
+.ConnectFour {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  height: 100vh;
+  border: 3px green solid;
+}
+
+.ConnectFour .Game {
+  background-color: blue;
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.ConnectFour .Game .Grid {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  justify-content: space-evenly;
+}
+
+.ConnectFour .Game .Grid .Column {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+  width: 50px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid teal
+}
+
+.ConnectFour .Game .Grid .Column .Position {
+  background-color: lightgreen;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.ConnectFour .Game .Grid .Column .Position:hover {
+  background-color: red;
+}
