@@ -49,18 +49,26 @@ body {
   flex-direction: column-reverse;
   flex-grow: 1;
   width: 50px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  border: 0.5px solid orange;
+  cursor: pointer;
+}
+
+.ConnectFour .Game .Grid .Column:hover {
   border: 1px solid teal
 }
 
-.ConnectFour .Game .Grid .Column .Position {
-  background-color: lightgreen;
-  width: 50px;
-  height: 50px;
+.ConnectFour .Game .Grid .Column .Token {
+  width: 75px;
+  height: 75px;
   text-align: center;
+  border: 1px solid grey;
 }
 
-.ConnectFour .Game .Grid .Column .Position:hover {
-  background-color: red;
+.ConnectFour .Game .Grid .Column .Token.player-1 {
+  background-color: blueviolet;
+}
+.ConnectFour .Game .Grid .Column .Token.player-2 {
+  background-color: burlywood;
 }

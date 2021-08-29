@@ -1,82 +1,65 @@
-type PlayerOne = 1
-
-type PlayerTwo = 2
-
-type PlayersUnion = PlayerOne | PlayerTwo
-
 interface TokenType {
   STANDARD: 'STANDARD'
+  // BOMB: 'BOMB'
 }
 
 type TokenTypesUnion = keyof TokenType
 
-interface Token {
+export interface Token {
   type: TokenTypesUnion;
-  player: PlayersUnion;
+  player: number;
 }
-
-type ColumnIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6
-
 interface Move {
-  column: ColumnIndex;
+  column: number;
   token: Token;
 }
 
 
 type ConnectFourGrid = Token[][]
-
 export class ConnectFourGame  {
-  private readonly HEIGHT: number = 6
-  private readonly WIDTH: number = 7
-  private readonly PLAYER_ONE: PlayerOne = 1
-  private readonly PLAYER_TWO: PlayerTwo = 2
+  private readonly HEIGHT = 6
+  private readonly WIDTH = 7
+  private readonly PLAYER_ONE = 1
+  private readonly PLAYER_TWO = 2
   private readonly moveStack: number[] = []
   private __grid: ConnectFourGrid = this.newGrid()
   readonly TOKEN_TYPES: TokenType = {
     STANDARD: 'STANDARD',
+    // BOMB: 'BOMB',
   }
 
   public get grid(): ConnectFourGrid {
     return [...this.__grid]
   }
 
-  public takeTurnPlayer(player: PlayersUnion) {
+  public get takeTurn() {
     return {
-      column: (column: ColumnIndex) => ({
-        dropToken: {
-          standard: () => {
-            this.drop({
-              column,
-              token: {
-                player,
-                type: this.TOKEN_TYPES.STANDARD,
-              }
-            })
+      player: (player: number) => ({
+        column: (column: number) => ({
+          drop: {
+            standardToken: () => {
+              return this.drop({
+                column,
+                token: {
+                  player,
+                  type: this.TOKEN_TYPES.STANDARD,
+                }
+              })
+            }
+            // bombToken: () => {
+            //   this.drop({
+            //     column,
+            //     token: {
+            //       player,
+            //       type: this.TOKEN_TYPES.BOMB,
+            //     }
+            //   })
+            // }
           }
-        }
+        })
       })
     }
   }
-
-  // public get takeTurn() {
-  //   return {
-  //     player: (player: PlayersUnion) => ({
-  //       column: (column: ColumnIndex) => ({
-  //         dropToken: {
-  //           standard: () => {
-  //             this.drop({
-  //               column,
-  //               token: {
-  //                 player,
-  //                 type: this.TOKEN_TYPES.STANDARD,
-  //               }
-  //             })
-  //           }
-  //         }
-  //       })
-  //     })
-  //   }
-  // }
 
   public newGame(): ConnectFourGrid {
     this.__grid = this.newGrid()
@@ -84,29 +67,31 @@ export class ConnectFourGame  {
   }
 
   private drop({ column, token }: Move): boolean {
-    this.moveStack.push(column)
     if (!Array.isArray(this.__grid[column])) {
-      throw new Error(`invalid column: ${column}`)
+      return false
     }
     if (!this.isValidPlayer(token.player)) {
-      throw new Error(`invalid player: ${token.player}`)
+      return false
     }
     if (!this.isValidTokenType(token.type)) {
-      throw new Error(`invalid token type: ${token.type}`)
+      return false
     }
     if (this.__grid[column].length + 1 > this.HEIGHT) {
-      throw new Error(`column max length exceeded: ${this.__grid[column].length}`)
+      return false
     }
-    this.__grid[column].push(token)
-    // this.resolveTokens()
-    return this.isWin()
+
+    this.moveStack.push(column)
+    this.push(column, token)
+
+    return true
   }
 
-  private isWin() {
+  public isWin(): boolean {
+    // TODO: win logic duh
     return false
   }
 
-  private isValidPlayer(n: PlayersUnion): boolean {
+  private isValidPlayer(n: number): boolean {
     return n === this.PLAYER_ONE || n === this.PLAYER_TWO
   }
 
@@ -114,7 +99,7 @@ export class ConnectFourGame  {
     return !!this.TOKEN_TYPES[tokenType]
   }
 
-  private toString() {
+  private toString(): string {
     return JSON.stringify(this.__grid, null, 2)
   }
 
@@ -124,5 +109,19 @@ export class ConnectFourGame  {
       grid.push([])
     }
     return grid
+  }
+
+  private push(column: number, token: Token): void {
+    this.__grid[column].push(token)
+  }
+}
+
+export class ColumnLengthExceededError extends Error {
+  public readonly columnIndex: number
+  constructor(columnIndex: number) {
+    super(`length exceeded maximum at column index ${columnIndex}`)
+    this.name = this.constructor.name
+    this.columnIndex = columnIndex
+    Error.captureStackTrace(this, this.constructor)
   }
 }
