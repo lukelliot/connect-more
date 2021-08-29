@@ -35,26 +35,24 @@ export class ConnectFourGame  {
     return {
       player: (player: number) => ({
         column: (column: number) => ({
-          drop: {
-            standardToken: () => {
-              return this.drop({
-                column,
-                token: {
-                  player,
-                  type: this.TOKEN_TYPES.STANDARD,
-                }
-              })
-            }
-            // bombToken: () => {
-            //   this.drop({
-            //     column,
-            //     token: {
-            //       player,
-            //       type: this.TOKEN_TYPES.BOMB,
-            //     }
-            //   })
-            // }
+          standard: () => {
+            return this.drop({
+              column,
+              token: {
+                player,
+                type: this.TOKEN_TYPES.STANDARD,
+              }
+            })
           }
+          // bombToken: () => {
+          //   this.drop({
+          //     column,
+          //     token: {
+          //       player,
+          //       type: this.TOKEN_TYPES.BOMB,
+          //     }
+          //   })
+          // }
         })
       })
     }

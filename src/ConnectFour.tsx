@@ -22,8 +22,11 @@ function ConnectFour() {
   }, [currentPlayer])
 
   const dropToken = (columnIndex: number) => () => {
-    const forPlayerTurn = game.takeTurn.player(currentPlayer).column(columnIndex)
-    const isValidMove = forPlayerTurn.drop.standardToken()
+    const isValidMove = game.takeTurn
+      .player(currentPlayer)
+      .column(columnIndex)
+      .standard()
+
     if (isValidMove) {
       const nextPlayer = currentPlayer === 1 ? 2 : 1
       setGridState(game.grid)
